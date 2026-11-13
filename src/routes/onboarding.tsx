@@ -475,13 +475,14 @@ function OnboardingPage() {
 
 function Title({ children }: { children: ReactNode }) {
   return (
-    <h1 className="mt-6 font-display text-[clamp(2.4rem,5.5vw,4.5rem)] leading-[0.98] font-light">
+    <h1 className="relative isolate mt-6 font-wide text-[clamp(1.8rem,4.2vw,3.5rem)] leading-[1.05]">
+      <span className="block-mark" aria-hidden />
       {children}
     </h1>
   );
 }
 function Accent({ children }: { children: ReactNode }) {
-  return <span className="font-serif-accent text-gradient-blue">{children}</span>;
+  return <span className="text-primary-glow">{children}</span>;
 }
 function Lead({ children }: { children: ReactNode }) {
   return (

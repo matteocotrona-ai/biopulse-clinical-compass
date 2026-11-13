@@ -19,7 +19,10 @@ function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="font-display text-8xl font-light text-gradient">404</h1>
+        <h1 className="relative isolate inline-block font-wide text-8xl text-foreground">
+          <span className="block-mark" aria-hidden />
+          404
+        </h1>
         <h2 className="mt-4 text-xl font-semibold text-foreground">Pagina non trovata</h2>
         <p className="mt-2 text-sm text-muted-foreground">
           La pagina che cerchi non esiste o è stata spostata.
@@ -90,7 +93,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "BioPulse-Agent: monitoraggio trasparente di carico e recupero per atleti, con IA spiegabile e supervisione umana.",
       },
       { name: "author", content: "BioPulse-Agent" },
-      { name: "theme-color", content: "#0b0d12" },
+      { name: "theme-color", content: "#121219" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -104,7 +107,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Unbounded:wght@200..600&display=swap",
       },
     ],
   }),

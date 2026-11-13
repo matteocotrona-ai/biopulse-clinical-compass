@@ -18,6 +18,7 @@
   --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Geist", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-wide: "Unbounded", "Geist", ui-sans-serif, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -92,16 +93,16 @@
 
 :root {
   color-scheme: dark;
-  --radius: 0.75rem;
+  --radius: 0.375rem;
 
-  --background: oklch(0.115 0.006 260);
+  --background: oklch(0.125 0.01 272);
   --foreground: oklch(0.965 0.004 250);
-  --surface: oklch(0.155 0.008 260);
-  --surface-raised: oklch(0.19 0.01 260);
-  --surface-sunken: oklch(0.095 0.005 260);
-  --card: oklch(0.15 0.008 260);
+  --surface: oklch(0.16 0.011 272);
+  --surface-raised: oklch(0.195 0.013 272);
+  --surface-sunken: oklch(0.1 0.008 272);
+  --card: oklch(0.155 0.011 272);
   --card-foreground: var(--foreground);
-  --popover: oklch(0.17 0.01 260);
+  --popover: oklch(0.175 0.012 272);
   --popover-foreground: var(--foreground);
 
   --primary: oklch(0.66 0.21 255);
@@ -135,7 +136,7 @@
   --chart-4: var(--level-yellow);
   --chart-5: var(--level-red);
 
-  --sidebar: oklch(0.1 0.006 260);
+  --sidebar: oklch(0.105 0.008 272);
   --sidebar-foreground: var(--foreground);
   --sidebar-primary: var(--primary);
   --sidebar-primary-foreground: var(--primary-foreground);
@@ -225,6 +226,29 @@
 @utility font-display {
   font-family: var(--font-display);
   letter-spacing: -0.035em;
+}
+/* Wide technical display face for primary headlines (reference: N.JEY "FUTURE") */
+@utility font-wide {
+  font-family: var(--font-wide);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+}
+/* Solid electric-blue block set behind the first letters of a headline */
+@utility block-mark {
+  position: absolute;
+  z-index: -1;
+  left: -0.18em;
+  top: 0.02em;
+  width: 0.62em;
+  height: 1.02em;
+  background: var(--primary);
+  box-shadow: 0 0 40px -6px oklch(0.66 0.21 255 / 60%);
+}
+/* Thin full-height column rules dividing the page */
+@utility bg-columns {
+  background-image: linear-gradient(to right, oklch(1 0 0 / 5.5%) 1px, transparent 1px);
+  background-size: calc(100% / 6) 100%;
+  background-position: calc(100% / 12) 0;
 }
 @utility font-serif-accent {
   font-family: var(--font-serif);
