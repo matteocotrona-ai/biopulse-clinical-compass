@@ -28,3 +28,11 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- BioPulse talks to an external FastAPI backend (not in this repo) through `src/lib/api.ts`, configured by `VITE_API_URL`; keep all data, auth (HttpOnly cookie + CSRF) and chat SSE there — never replace it with mock data, because the brief requires preserving the real integration.
+- Portal pages live under the pathless `_portal` layout, which owns session checks (`PortalProvider`) and the shell; session state is client-only because the session cookie belongs to the backend's domain.
+- Shared UI for this app lives in `src/components/bio/`; styling uses semantic tokens and `@utility` helpers in `src/styles.css` (panel, glass, field, eyebrow), so components never hardcode colors.
+- Framer Motion respects reduced motion via `<MotionConfig reducedMotion="user">` in the root; never branch `initial` on `useReducedMotion()` in SSR-rendered components, because it causes hydration mismatches.
+- Per-user browser preferences keep the original `biopulse-*` localStorage keys (`src/lib/onboarding.ts`) so existing users keep their onboarding state.
