@@ -141,8 +141,8 @@ function Home() {
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/70" />
 
         {/* Annotation callouts over the figure */}
-        <Callout className="top-[24%] right-[14%]" delay={1.6} label="Variabilità cardiaca" />
-        <Callout className="top-[52%] right-[46%]" delay={1.8} label="Carico acuto" side="left" />
+        <Callout className="top-[17%] right-[6%]" delay={1.6} label="Variabilità cardiaca" />
+        <Callout className="top-[68%] right-[8%]" delay={1.8} label="Carico acuto" />
 
         {/* Vertical signal rail */}
         <motion.ul
@@ -421,7 +421,7 @@ function Callout({
     >
       <span className="size-1.5 rounded-full bg-primary-glow shadow-glow" />
       <motion.span
-        className={`h-px w-14 bg-border-strong ${side === "left" ? "origin-right" : "origin-left"}`}
+        className={`h-px w-14 bg-foreground/35 ${side === "left" ? "origin-right" : "origin-left"}`}
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ delay: delay + 0.2, duration: 0.8, ease: EASE }}

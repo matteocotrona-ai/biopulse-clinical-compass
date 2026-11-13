@@ -356,7 +356,12 @@ export function PageHeading({
         <h1 className="relative isolate mt-5 font-wide text-[clamp(1.9rem,4vw,3.4rem)] leading-[1.02]">
           <span className="block-mark" aria-hidden />
           {title}
-          {accent && <span className="text-primary-glow"> {accent}</span>}
+          {accent && (
+            <span className="text-primary-glow">
+              {/^[.,!?]/.test(String(accent)) ? "" : " "}
+              {accent}
+            </span>
+          )}
         </h1>
         {lead && (
           <p className="mt-4 max-w-xl text-[0.975rem] leading-relaxed text-muted-foreground">
