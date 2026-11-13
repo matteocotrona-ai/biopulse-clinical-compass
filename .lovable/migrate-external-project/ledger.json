@@ -1,0 +1,37 @@
+[
+ {
+  "capability": "frontend code (Next.js 15 pages + components)",
+  "source": "per-matteo-main/frontend",
+  "outcome": "port to TanStack Start with full redesign",
+  "status": "verified",
+  "next_action": "none (all 9 routes checked in browser with sample responses)"
+ },
+ {
+  "capability": "backend API (FastAPI, PostgreSQL+pgvector, Redis, Groq/Agno, HITL)",
+  "source": "not included in archive; frontend calls NEXT_PUBLIC_API_URL",
+  "outcome": "preserve external integration per user brief (VITE_API_URL)",
+  "status": "blocked",
+  "next_action": "user provides public HTTPS backend URL with CORS + cross-site cookies for the preview domain"
+ },
+ {
+  "capability": "auth (cookie session + CSRF via backend)",
+  "source": "lib/api.ts",
+  "outcome": "preserve",
+  "status": "preserved",
+  "next_action": "live verification needs backend"
+ },
+ {
+  "capability": "records / users",
+  "source": "backend database (not included)",
+  "outcome": "stay in user's backend",
+  "status": "not_applicable",
+  "next_action": "none"
+ },
+ {
+  "capability": "local browser preferences (onboarding, coach contact, cookie choice)",
+  "source": "localStorage keys biopulse-*",
+  "outcome": "preserve keys",
+  "status": "preserved",
+  "next_action": "none"
+ }
+]

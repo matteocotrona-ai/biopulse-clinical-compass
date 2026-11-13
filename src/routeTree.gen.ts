@@ -10,33 +10,133 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PortalRouteImport } from './routes/_portal'
+import { Route as CookiesRouteImport } from './routes/cookies'
+import { Route as EthicsRouteImport } from './routes/ethics'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PortalAssistantRouteImport } from './routes/_portal.assistant'
+import { Route as PortalDashboardRouteImport } from './routes/_portal.dashboard'
+import { Route as PortalProfileRouteImport } from './routes/_portal.profile'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PortalRoute = PortalRouteImport.update({
+  id: '/_portal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CookiesRoute = CookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EthicsRoute = EthicsRouteImport.update({
+  id: '/ethics',
+  path: '/ethics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortalAssistantRoute = PortalAssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalDashboardRoute = PortalDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalProfileRoute = PortalProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => PortalRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cookies': typeof CookiesRoute
+  '/ethics': typeof EthicsRoute
+  '/onboarding': typeof OnboardingRoute
+  '/privacy': typeof PrivacyRoute
+  '/assistant': typeof PortalAssistantRoute
+  '/dashboard': typeof PortalDashboardRoute
+  '/profile': typeof PortalProfileRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cookies': typeof CookiesRoute
+  '/ethics': typeof EthicsRoute
+  '/onboarding': typeof OnboardingRoute
+  '/privacy': typeof PrivacyRoute
+  '/assistant': typeof PortalAssistantRoute
+  '/dashboard': typeof PortalDashboardRoute
+  '/profile': typeof PortalProfileRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_portal': typeof PortalRouteWithChildren
+  '/cookies': typeof CookiesRoute
+  '/ethics': typeof EthicsRoute
+  '/onboarding': typeof OnboardingRoute
+  '/privacy': typeof PrivacyRoute
+  '/_portal/assistant': typeof PortalAssistantRoute
+  '/_portal/dashboard': typeof PortalDashboardRoute
+  '/_portal/profile': typeof PortalProfileRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/cookies'
+    | '/ethics'
+    | '/onboarding'
+    | '/privacy'
+    | '/assistant'
+    | '/dashboard'
+    | '/profile'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/cookies'
+    | '/ethics'
+    | '/onboarding'
+    | '/privacy'
+    | '/assistant'
+    | '/dashboard'
+    | '/profile'
+  id:
+    | '__root__'
+    | '/'
+    | '/_portal'
+    | '/cookies'
+    | '/ethics'
+    | '/onboarding'
+    | '/privacy'
+    | '/_portal/assistant'
+    | '/_portal/dashboard'
+    | '/_portal/profile'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PortalRoute: typeof PortalRouteWithChildren
+  CookiesRoute: typeof CookiesRoute
+  EthicsRoute: typeof EthicsRoute
+  OnboardingRoute: typeof OnboardingRoute
+  PrivacyRoute: typeof PrivacyRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +148,87 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_portal': {
+      id: '/_portal'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof PortalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cookies': {
+      id: '/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof CookiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ethics': {
+      id: '/ethics'
+      path: '/ethics'
+      fullPath: '/ethics'
+      preLoaderRoute: typeof EthicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_portal/assistant': {
+      id: '/_portal/assistant'
+      path: '/assistant'
+      fullPath: '/assistant'
+      preLoaderRoute: typeof PortalAssistantRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/_portal/dashboard': {
+      id: '/_portal/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof PortalDashboardRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/_portal/profile': {
+      id: '/_portal/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof PortalProfileRouteImport
+      parentRoute: typeof PortalRoute
+    }
   }
 }
 
+interface PortalRouteChildren {
+  PortalAssistantRoute: typeof PortalAssistantRoute
+  PortalDashboardRoute: typeof PortalDashboardRoute
+  PortalProfileRoute: typeof PortalProfileRoute
+}
+
+const PortalRouteChildren: PortalRouteChildren = {
+  PortalAssistantRoute: PortalAssistantRoute,
+  PortalDashboardRoute: PortalDashboardRoute,
+  PortalProfileRoute: PortalProfileRoute,
+}
+
+const PortalRouteWithChildren =
+  PortalRoute._addFileChildren(PortalRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PortalRoute: PortalRouteWithChildren,
+  CookiesRoute: CookiesRoute,
+  EthicsRoute: EthicsRoute,
+  OnboardingRoute: OnboardingRoute,
+  PrivacyRoute: PrivacyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
