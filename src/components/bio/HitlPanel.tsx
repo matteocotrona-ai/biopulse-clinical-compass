@@ -48,7 +48,10 @@ function Case({ c, onDone }: { c: HitlCase; onDone: () => void }) {
       animate={{ opacity: 1, y: 0 }}
       className="panel overflow-hidden p-5 sm:p-6"
     >
-      <span className="absolute inset-y-0 left-0 w-[2px]" style={{ background: meta.color, boxShadow: `0 0 16px ${meta.color}` }} />
+      <span
+        className="absolute inset-y-0 left-0 w-[2px]"
+        style={{ background: meta.color, boxShadow: `0 0 16px ${meta.color}` }}
+      />
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h4 className="font-display text-xl">
@@ -59,7 +62,10 @@ function Case({ c, onDone }: { c: HitlCase; onDone: () => void }) {
             {new Date(c.created_at).toLocaleString("it-IT")}
           </p>
         </div>
-        <span className="rounded-full border px-3 py-1 text-xs font-medium" style={{ background: meta.soft, color: meta.color, borderColor: meta.soft }}>
+        <span
+          className="rounded-full border px-3 py-1 text-xs font-medium"
+          style={{ background: meta.soft, color: meta.color, borderColor: meta.soft }}
+        >
           {meta.label}
         </span>
       </header>
@@ -83,7 +89,11 @@ function Case({ c, onDone }: { c: HitlCase; onDone: () => void }) {
           .filter((f) => f.severity !== "info")
           .map((f) => (
             <li key={f.code} className="flex gap-2">
-              <span style={{ color: f.severity === "red" ? "var(--level-red)" : "var(--level-yellow)" }}>•</span>
+              <span
+                style={{ color: f.severity === "red" ? "var(--level-red)" : "var(--level-yellow)" }}
+              >
+                •
+              </span>
               {f.message}
             </li>
           ))}
@@ -91,7 +101,10 @@ function Case({ c, onDone }: { c: HitlCase; onDone: () => void }) {
 
       {c.status === "pending" ? (
         <div className="mt-5 grid gap-3">
-          <label className="grid gap-2 text-xs font-medium text-muted-foreground" htmlFor={`d${c.id}`}>
+          <label
+            className="grid gap-2 text-xs font-medium text-muted-foreground"
+            htmlFor={`d${c.id}`}
+          >
             Bozza di protocollo (modificabile)
             <textarea
               id={`d${c.id}`}
@@ -101,17 +114,31 @@ function Case({ c, onDone }: { c: HitlCase; onDone: () => void }) {
               className="field h-auto py-3 leading-relaxed"
             />
           </label>
-          <label className="grid gap-2 text-xs font-medium text-muted-foreground" htmlFor={`n${c.id}`}>
+          <label
+            className="grid gap-2 text-xs font-medium text-muted-foreground"
+            htmlFor={`n${c.id}`}
+          >
             Nota (obbligatoria se respingi)
-            <input id={`n${c.id}`} value={note} onChange={(e) => setNote(e.target.value)} className="field" />
+            <input
+              id={`n${c.id}`}
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+              className="field"
+            />
           </label>
           {err && <Notice tone="error">{err}</Notice>}
           <div className="flex flex-wrap gap-2 pt-1">
             <Button disabled={busy !== null} onClick={() => act("approve")}>
-              {busy === "approve" && <Loader2 className="animate-spin" />} Approva e invia all'atleta
+              {busy === "approve" && <Loader2 className="animate-spin" />} Approva e invia
+              all'atleta
             </Button>
-            <Button variant="outline" disabled={busy !== null || text === c.draft_text} onClick={() => act("modify")}>
-              {busy === "modify" && <Loader2 className="animate-spin" />} Invia la versione modificata
+            <Button
+              variant="outline"
+              disabled={busy !== null || text === c.draft_text}
+              onClick={() => act("modify")}
+            >
+              {busy === "modify" && <Loader2 className="animate-spin" />} Invia la versione
+              modificata
             </Button>
             <Button variant="destructive" disabled={busy !== null} onClick={() => act("reject")}>
               {busy === "reject" && <Loader2 className="animate-spin" />} Respingi
@@ -122,8 +149,8 @@ function Case({ c, onDone }: { c: HitlCase; onDone: () => void }) {
         <p className="mt-5 flex gap-2.5 rounded-xl border border-border bg-surface-sunken/70 p-3.5 text-sm text-muted-foreground">
           <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-level-green" />
           <span>
-            <strong className="font-medium text-foreground">{STATUS[c.status]}</strong> da {c.reviewer}.{" "}
-            {c.final_text ?? c.reviewer_note}
+            <strong className="font-medium text-foreground">{STATUS[c.status]}</strong> da{" "}
+            {c.reviewer}. {c.final_text ?? c.reviewer_note}
           </span>
         </p>
       )}
@@ -131,7 +158,17 @@ function Case({ c, onDone }: { c: HitlCase; onDone: () => void }) {
   );
 }
 
-function Section({ title, count, icon: Icon, children }: { title: string; count: number; icon: typeof Inbox; children: React.ReactNode }) {
+function Section({
+  title,
+  count,
+  icon: Icon,
+  children,
+}: {
+  title: string;
+  count: number;
+  icon: typeof Inbox;
+  children: React.ReactNode;
+}) {
   return (
     <Collapsible className="mt-6">
       <CollapsibleTrigger className="group flex w-full items-center justify-between rounded-xl border border-border bg-surface/60 px-4 py-3 text-sm transition-colors hover:border-primary/30">
@@ -171,16 +208,22 @@ export function HitlPanel({ refreshKey }: { refreshKey: number }) {
   const done = cases.filter((c) => c.status !== "pending");
   return (
     <div>
-      {err && <Notice tone="error" className="mb-4">{err}</Notice>}
+      {err && (
+        <Notice tone="error" className="mb-4">
+          {err}
+        </Notice>
+      )}
       <h3 className="flex items-baseline gap-3 font-display text-2xl font-light">
-        Da validare <span className="tnum font-mono text-sm text-primary-glow">{pending.length}</span>
+        Da validare{" "}
+        <span className="tnum font-mono text-sm text-primary-glow">{pending.length}</span>
       </h3>
       <div className="mt-4 grid gap-4">
         {pending.length === 0 && (
           <div className="flex flex-col items-center rounded-xl border border-dashed border-border px-6 py-12 text-center">
             <Inbox className="size-6 text-faint" />
             <p className="mt-3 max-w-sm text-sm text-muted-foreground">
-              Nessun caso in attesa. Quando l'agente rileva un rischio alto, apparirà qui prima di raggiungere l'atleta.
+              Nessun caso in attesa. Quando l'agente rileva un rischio alto, apparirà qui prima di
+              raggiungere l'atleta.
             </p>
           </div>
         )}
@@ -199,9 +242,14 @@ export function HitlPanel({ refreshKey }: { refreshKey: number }) {
         <Section title="Avvisi inviati" count={alerts.length} icon={BellRing}>
           <ul className="grid gap-2 text-sm">
             {alerts.map((a) => (
-              <li key={a.id} className="rounded-lg border border-border bg-surface-sunken/60 px-3 py-2 text-muted-foreground">
-                <span className="tnum font-mono text-xs text-faint">{new Date(a.created_at).toLocaleTimeString("it-IT")}</span> ·{" "}
-                {a.body} {a.simulated && <em className="text-faint">(simulato)</em>}
+              <li
+                key={a.id}
+                className="rounded-lg border border-border bg-surface-sunken/60 px-3 py-2 text-muted-foreground"
+              >
+                <span className="tnum font-mono text-xs text-faint">
+                  {new Date(a.created_at).toLocaleTimeString("it-IT")}
+                </span>{" "}
+                · {a.body} {a.simulated && <em className="text-faint">(simulato)</em>}
               </li>
             ))}
           </ul>

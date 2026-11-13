@@ -4,7 +4,11 @@ import { Ambient } from "./Ambient";
 /** Full-screen loader: logo inside expanding rings with a shimmer bar. */
 export function PortalLoader({ label }: { label: string }) {
   return (
-    <div className="relative grid min-h-screen place-items-center overflow-hidden" role="status" aria-live="polite">
+    <div
+      className="relative grid min-h-screen place-items-center overflow-hidden"
+      role="status"
+      aria-live="polite"
+    >
       <Ambient grid={false} />
       <div className="relative z-10 flex flex-col items-center gap-8">
         <div className="relative grid size-24 place-items-center">

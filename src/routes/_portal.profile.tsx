@@ -16,9 +16,16 @@ export const Route = createFileRoute("/_portal/profile")({
   head: () => ({
     meta: [
       { title: "Il mio profilo — BioPulse" },
-      { name: "description", content: "Gestisci profilo, consensi biometrici, dati demo e preferenze locali di BioPulse." },
+      {
+        name: "description",
+        content:
+          "Gestisci profilo, consensi biometrici, dati demo e preferenze locali di BioPulse.",
+      },
       { property: "og:title", content: "Il mio profilo — BioPulse" },
-      { property: "og:description", content: "Impostazioni, consensi reversibili e controllo dei dati demo." },
+      {
+        property: "og:description",
+        content: "Impostazioni, consensi reversibili e controllo dei dati demo.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -26,12 +33,24 @@ export const Route = createFileRoute("/_portal/profile")({
   component: ProfilePage,
 });
 
-function Setting({ eyebrow, title, lead, children }: { eyebrow: string; title: string; lead?: string; children: React.ReactNode }) {
+function Setting({
+  eyebrow,
+  title,
+  lead,
+  children,
+}: {
+  eyebrow: string;
+  title: string;
+  lead?: string;
+  children: React.ReactNode;
+}) {
   return (
     <section className="panel p-6 sm:p-8">
       <p className="eyebrow">{eyebrow}</p>
       <h2 className="mt-3 font-display text-2xl font-light sm:text-3xl">{title}</h2>
-      {lead && <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">{lead}</p>}
+      {lead && (
+        <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">{lead}</p>
+      )}
       <div className="mt-6">{children}</div>
     </section>
   );
@@ -72,7 +91,10 @@ function ProfilePage() {
     setProfileSaved(false);
     try {
       const updated = await updateAthleteProfile(athleteId, { name: displayName, profile });
-      setData({ ...data, athlete: { ...data.athlete, name: updated.name, profile: updated.profile } });
+      setData({
+        ...data,
+        athlete: { ...data.athlete, name: updated.name, profile: updated.profile },
+      });
       setProfileSaved(true);
       toast.success("Profilo aggiornato.");
     } catch (reason) {
@@ -153,14 +175,21 @@ function ProfilePage() {
                       <option value="master">Master</option>
                     </select>
                   </label>
-                  {profileError && <Notice tone="error" className="sm:col-span-2">{profileError}</Notice>}
+                  {profileError && (
+                    <Notice tone="error" className="sm:col-span-2">
+                      {profileError}
+                    </Notice>
+                  )}
                   <div className="flex items-center gap-3 sm:col-span-2">
                     <Button type="submit" disabled={profileBusy || !data}>
                       {profileBusy ? <Loader2 className="animate-spin" /> : null}
                       {profileBusy ? "Salvo…" : "Salva profilo"}
                     </Button>
                     {profileSaved && (
-                      <span role="status" className="flex items-center gap-1.5 text-sm text-level-green">
+                      <span
+                        role="status"
+                        className="flex items-center gap-1.5 text-sm text-level-green"
+                      >
                         <Check className="size-4" /> Profilo aggiornato.
                       </span>
                     )}
@@ -195,7 +224,10 @@ function ProfilePage() {
                     Salva nel browser
                   </Button>
                   {saved && (
-                    <span role="status" className="flex items-center gap-1.5 text-sm text-level-green">
+                    <span
+                      role="status"
+                      className="flex items-center gap-1.5 text-sm text-level-green"
+                    >
                       <Check className="size-4" /> Salvato su questo dispositivo
                     </span>
                   )}
@@ -207,7 +239,8 @@ function ProfilePage() {
                   <div className="flex-1">
                     <h3 className="font-medium">Wearable</h3>
                     <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                      Provider reale non configurato. La sincronizzazione resta sintetica e serve solo a provare la demo.
+                      Provider reale non configurato. La sincronizzazione resta sintetica e serve
+                      solo a provare la demo.
                     </p>
                   </div>
                   <span className="rounded-full border border-primary/30 px-2 py-0.5 font-mono text-[0.6rem] tracking-[0.12em] text-primary-glow">
@@ -281,10 +314,13 @@ function ProfilePage() {
         <Reveal delay={0.3}>
           <aside className="panel sticky top-28 overflow-hidden p-6">
             <div className="pointer-events-none absolute -top-20 -right-20 size-56 rounded-full bg-primary/20 blur-3xl" />
-            <span className="relative grid size-9 place-items-center rounded-full border border-warning/40 font-semibold text-warning">!</span>
+            <span className="relative grid size-9 place-items-center rounded-full border border-warning/40 font-semibold text-warning">
+              !
+            </span>
             <p className="relative mt-5 eyebrow">Stato del prototipo</p>
             <h2 className="relative mt-3 font-display text-2xl font-light">
-              Trasparenza <span className="font-serif-accent text-primary-glow">prima di tutto.</span>
+              Trasparenza{" "}
+              <span className="font-serif-accent text-primary-glow">prima di tutto.</span>
             </h2>
             <ul className="relative mt-6 grid gap-px overflow-hidden rounded-xl border border-border bg-border text-sm">
               {[
@@ -294,7 +330,10 @@ function ProfilePage() {
                 ["Metriche", "non validate clinicamente"],
                 ["Analytics", "non presenti"],
               ].map(([k, v]) => (
-                <li key={k} className="flex items-center justify-between gap-3 bg-surface px-4 py-3">
+                <li
+                  key={k}
+                  className="flex items-center justify-between gap-3 bg-surface px-4 py-3"
+                >
                   <span className="text-muted-foreground">{k}</span>
                   <span className="text-right font-mono text-[0.7rem] text-foreground/80">{v}</span>
                 </li>

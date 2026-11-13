@@ -1,7 +1,16 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { type FormEvent, type ReactNode, useEffect, useState } from "react";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Cookie, Radio, UserRound, Watch } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ArrowUpRight,
+  Check,
+  Cookie,
+  Radio,
+  UserRound,
+  Watch,
+} from "lucide-react";
 
 import { Ambient } from "@/components/bio/Ambient";
 import { Brand } from "@/components/bio/Brand";
@@ -20,7 +29,11 @@ export const Route = createFileRoute("/onboarding")({
   head: () => ({
     meta: [
       { title: "Orientamento — BioPulse" },
-      { name: "description", content: "Configura il tuo spazio BioPulse: connessioni attive, confini della privacy e un tour in 30 secondi." },
+      {
+        name: "description",
+        content:
+          "Configura il tuo spazio BioPulse: connessioni attive, confini della privacy e un tour in 30 secondi.",
+      },
       { property: "og:title", content: "Orientamento — BioPulse" },
       { property: "og:description", content: "Il tuo corpo parla. Impariamo ad ascoltarlo." },
       { property: "og:type", content: "website" },
@@ -50,9 +63,11 @@ function OnboardingPage() {
       .then((value) => {
         if (!active) return;
         setSession(value);
-        if (localStorage.getItem(keys.onboarding(value.user.id)) === "complete") navigate({ to: "/dashboard", replace: true });
+        if (localStorage.getItem(keys.onboarding(value.user.id)) === "complete")
+          navigate({ to: "/dashboard", replace: true });
         const savedStep = Number(localStorage.getItem(keys.step(value.user.id)));
-        if (Number.isInteger(savedStep) && savedStep >= 0 && savedStep < STEPS.length) setStep(savedStep);
+        if (Number.isInteger(savedStep) && savedStep >= 0 && savedStep < STEPS.length)
+          setStep(savedStep);
         setContact(localStorage.getItem(keys.contact(value.user.id)) ?? "");
         setReadPrivacy(localStorage.getItem(keys.privacy(value.user.id)) === "true");
         setPreferencesLoaded(true);
@@ -109,7 +124,10 @@ function OnboardingPage() {
           <b className="ml-2 font-medium text-foreground">0{step + 1} / 04</b>
         </span>
       </header>
-      <div className="relative z-10 mx-auto max-w-[90rem] px-5 sm:px-10" aria-label={`Passaggio ${step + 1} di 4`}>
+      <div
+        className="relative z-10 mx-auto max-w-[90rem] px-5 sm:px-10"
+        aria-label={`Passaggio ${step + 1} di 4`}
+      >
         <div className="grid grid-cols-4 gap-2">
           {STEPS.map((label, i) => (
             <div key={label}>
@@ -121,7 +139,12 @@ function OnboardingPage() {
                   transition={{ duration: 0.8, ease: EASE }}
                 />
               </div>
-              <p className={cn("mt-2 hidden font-mono text-[0.6rem] tracking-[0.14em] uppercase sm:block", i <= step ? "text-foreground/80" : "text-faint")}>
+              <p
+                className={cn(
+                  "mt-2 hidden font-mono text-[0.6rem] tracking-[0.14em] uppercase sm:block",
+                  i <= step ? "text-foreground/80" : "text-faint",
+                )}
+              >
                 {label}
               </p>
             </div>
@@ -144,7 +167,8 @@ function OnboardingPage() {
               {step === 0 && (
                 <>
                   <p className="flex items-center gap-2 eyebrow">
-                    <span className="glow-dot" /> Benvenuto, {athlete?.name?.toUpperCase() ?? "ATLETA"}
+                    <span className="glow-dot" /> Benvenuto,{" "}
+                    {athlete?.name?.toUpperCase() ?? "ATLETA"}
                   </p>
                   <Title>
                     Il tuo corpo parla.
@@ -152,14 +176,23 @@ function OnboardingPage() {
                     <Accent>Impariamo ad ascoltarlo.</Accent>
                   </Title>
                   <Lead>
-                    BioPulse organizza segnali di allenamento e recupero in una vista comprensibile. Non fa diagnosi, non
-                    sostituisce il tuo giudizio né quello di un professionista.
+                    BioPulse organizza segnali di allenamento e recupero in una vista comprensibile.
+                    Non fa diagnosi, non sostituisce il tuo giudizio né quello di un professionista.
                   </Lead>
                   <div className="mt-10 grid gap-3 md:grid-cols-3">
                     {[
-                      ["Osserva", "Esplora metriche, trend e qualità dei dati senza trasformare un numero in una diagnosi."],
-                      ["Comprendi", "Chiedi all'agente di spiegare i segnali e le incertezze che li accompagnano."],
-                      ["Decidi con consapevolezza", "Usa le informazioni come supporto, confrontandoti con il tuo team quando serve."],
+                      [
+                        "Osserva",
+                        "Esplora metriche, trend e qualità dei dati senza trasformare un numero in una diagnosi.",
+                      ],
+                      [
+                        "Comprendi",
+                        "Chiedi all'agente di spiegare i segnali e le incertezze che li accompagnano.",
+                      ],
+                      [
+                        "Decidi con consapevolezza",
+                        "Usa le informazioni come supporto, confrontandoti con il tuo team quando serve.",
+                      ],
                     ].map(([t, d], i) => (
                       <motion.article
                         key={t}
@@ -192,13 +225,24 @@ function OnboardingPage() {
                     <Accent>che è davvero attivo.</Accent>
                   </Title>
                   <div className="mt-10 grid gap-3">
-                    <Connection icon={<Watch className="size-4" />} title="Wearable" status="SIMULATO">
-                      Il collegamento a orologi reali non è attivo. Puoi provare dati e sincronizzazione{" "}
-                      <strong className="font-medium text-foreground">interamente simulati</strong> dal profilo.
+                    <Connection
+                      icon={<Watch className="size-4" />}
+                      title="Wearable"
+                      status="SIMULATO"
+                    >
+                      Il collegamento a orologi reali non è attivo. Puoi provare dati e
+                      sincronizzazione{" "}
+                      <strong className="font-medium text-foreground">interamente simulati</strong>{" "}
+                      dal profilo.
                     </Connection>
-                    <Connection icon={<UserRound className="size-4" />} title="Allenatore o professionista" status="NON COLLEGATO" inactive>
-                      Il contatto non è collegato a messaggi o notifiche. Se lo inserisci, resta salvato solo in questo
-                      browser e non viene contattato.
+                    <Connection
+                      icon={<UserRound className="size-4" />}
+                      title="Allenatore o professionista"
+                      status="NON COLLEGATO"
+                      inactive
+                    >
+                      Il contatto non è collegato a messaggi o notifiche. Se lo inserisci, resta
+                      salvato solo in questo browser e non viene contattato.
                       <label className="mt-4 grid gap-2 text-xs font-medium text-muted-foreground">
                         Contatto (facoltativo)
                         <input
@@ -212,8 +256,11 @@ function OnboardingPage() {
                     </Connection>
                   </div>
                   <Notice className="mt-4">
-                    <b className="font-medium text-foreground">Profilo: {athlete?.profile ?? "standard"}</b> — i profili
-                    sono descrittivi e non modificano le formule. Il contatto professionista non abilita condivisione di dati.
+                    <b className="font-medium text-foreground">
+                      Profilo: {athlete?.profile ?? "standard"}
+                    </b>{" "}
+                    — i profili sono descrittivi e non modificano le formule. Il contatto
+                    professionista non abilita condivisione di dati.
                   </Notice>
                   <Actions>
                     <Button variant="ghost" onClick={() => go(0)}>
@@ -235,24 +282,43 @@ function OnboardingPage() {
                     <Accent>conosci i confini.</Accent>
                   </Title>
                   <Lead>
-                    Questi testi descrivono il prototipo attuale, non sono informative legali definitive. Devono essere
-                    verificati da professionisti privacy e legali prima di un uso reale.
+                    Questi testi descrivono il prototipo attuale, non sono informative legali
+                    definitive. Devono essere verificati da professionisti privacy e legali prima di
+                    un uso reale.
                   </Lead>
                   <div className="mt-8 grid gap-3 md:grid-cols-3">
                     {(
                       [
-                        ["/privacy", "Privacy e trattamento dei dati", "Finalità, dati biometrici, conservazione e cancellazione"],
-                        ["/cookies", "Cookie e archiviazione locale", "Cookie tecnici e preferenze salvate nel browser"],
-                        ["/ethics", "Etica, limiti e possibili bias", "Limiti di validazione, inclusione e supervisione"],
+                        [
+                          "/privacy",
+                          "Privacy e trattamento dei dati",
+                          "Finalità, dati biometrici, conservazione e cancellazione",
+                        ],
+                        [
+                          "/cookies",
+                          "Cookie e archiviazione locale",
+                          "Cookie tecnici e preferenze salvate nel browser",
+                        ],
+                        [
+                          "/ethics",
+                          "Etica, limiti e possibili bias",
+                          "Limiti di validazione, inclusione e supervisione",
+                        ],
                       ] as const
                     ).map(([to, t, d], i) => (
-                      <Link key={to} to={to} className="group panel block p-5 transition-colors hover:border-primary/40">
+                      <Link
+                        key={to}
+                        to={to}
+                        className="group panel block p-5 transition-colors hover:border-primary/40"
+                      >
                         <span className="flex items-center justify-between font-mono text-xs text-primary-glow">
                           0{i + 1}
                           <ArrowUpRight className="size-4 text-faint transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary-glow" />
                         </span>
                         <b className="mt-5 block font-display text-base font-normal">{t}</b>
-                        <small className="mt-2 block text-xs leading-relaxed text-muted-foreground">{d}</small>
+                        <small className="mt-2 block text-xs leading-relaxed text-muted-foreground">
+                          {d}
+                        </small>
                       </Link>
                     ))}
                   </div>
@@ -263,19 +329,25 @@ function OnboardingPage() {
                     <div className="flex-1">
                       <b className="font-medium">Solo archiviazione necessaria</b>
                       <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                        Autenticazione e protezione CSRF richiedono cookie tecnici. Non risultano cookie analytics o
-                        pubblicitari: non c'è un'opzione “accetta tutti”.
+                        Autenticazione e protezione CSRF richiedono cookie tecnici. Non risultano
+                        cookie analytics o pubblicitari: non c'è un'opzione “accetta tutti”.
                       </p>
                     </div>
                     <span className="rounded-full border border-border-strong px-2 py-0.5 font-mono text-[0.6rem] tracking-[0.12em] text-muted-foreground">
                       NECESSARI
                     </span>
                   </div>
-                  {error && <Notice tone="error" className="mt-4">{error}</Notice>}
+                  {error && (
+                    <Notice tone="error" className="mt-4">
+                      {error}
+                    </Notice>
+                  )}
                   <label
                     className={cn(
                       "mt-4 flex cursor-pointer items-start gap-4 rounded-xl border p-4 transition-colors",
-                      readPrivacy ? "border-primary/50 bg-primary/[0.08]" : "border-border bg-surface/50 hover:border-border-strong",
+                      readPrivacy
+                        ? "border-primary/50 bg-primary/[0.08]"
+                        : "border-border bg-surface/50 hover:border-border-strong",
                     )}
                   >
                     <input
@@ -290,14 +362,17 @@ function OnboardingPage() {
                     <span
                       className={cn(
                         "mt-0.5 grid size-5 shrink-0 place-items-center rounded-md border transition-all duration-300 peer-focus-visible:ring-2 peer-focus-visible:ring-ring",
-                        readPrivacy ? "border-primary bg-primary text-primary-foreground shadow-glow" : "border-border-strong",
+                        readPrivacy
+                          ? "border-primary bg-primary text-primary-foreground shadow-glow"
+                          : "border-border-strong",
                       )}
                     >
                       {readPrivacy && <Check className="size-3.5" />}
                     </span>
                     <span className="text-sm leading-relaxed text-muted-foreground">
-                      Confermo di aver consultato i testi prototipali e scelgo di proseguire nella demo con i soli strumenti
-                      tecnici necessari. Ho capito che non è un consenso a usare dati biometrici.
+                      Confermo di aver consultato i testi prototipali e scelgo di proseguire nella
+                      demo con i soli strumenti tecnici necessari. Ho capito che non è un consenso a
+                      usare dati biometrici.
                     </span>
                   </label>
                   <Actions>
@@ -331,8 +406,14 @@ function OnboardingPage() {
                   <div className="mt-10 grid gap-3">
                     {[
                       ["Panoramica", "metriche, trend, livello di completezza e fonti demo."],
-                      ["BioPulse AI", "chat esplicabile, con tracciamento dei passaggi e limiti dichiarati."],
-                      ["Profilo", "consenso biometrico separato, dati simulati e strumenti di cancellazione."],
+                      [
+                        "BioPulse AI",
+                        "chat esplicabile, con tracciamento dei passaggi e limiti dichiarati.",
+                      ],
+                      [
+                        "Profilo",
+                        "consenso biometrico separato, dati simulati e strumenti di cancellazione.",
+                      ],
                     ].map(([t, d], i) => (
                       <motion.div
                         key={t}
@@ -375,8 +456,8 @@ function OnboardingPage() {
             <span className="font-serif-accent text-primary-glow">Mai come verdetto.</span>
           </h2>
           <p className="relative mt-4 text-sm leading-relaxed text-muted-foreground">
-            Un punteggio non racconta tutta la persona. Tieni conto del contesto, dei tuoi sintomi e della voce dei
-            professionisti.
+            Un punteggio non racconta tutta la persona. Tieni conto del contesto, dei tuoi sintomi e
+            della voce dei professionisti.
           </p>
           <div className="relative mt-8 flex items-center gap-3 rounded-xl border border-warning/30 bg-warning/[0.06] p-4">
             <Radio className="size-4 shrink-0 text-warning" />
@@ -393,16 +474,28 @@ function OnboardingPage() {
 }
 
 function Title({ children }: { children: ReactNode }) {
-  return <h1 className="mt-6 font-display text-[clamp(2.4rem,5.5vw,4.5rem)] leading-[0.98] font-light">{children}</h1>;
+  return (
+    <h1 className="mt-6 font-display text-[clamp(2.4rem,5.5vw,4.5rem)] leading-[0.98] font-light">
+      {children}
+    </h1>
+  );
 }
 function Accent({ children }: { children: ReactNode }) {
   return <span className="font-serif-accent text-gradient-blue">{children}</span>;
 }
 function Lead({ children }: { children: ReactNode }) {
-  return <p className="mt-6 max-w-2xl text-[0.975rem] leading-relaxed text-muted-foreground">{children}</p>;
+  return (
+    <p className="mt-6 max-w-2xl text-[0.975rem] leading-relaxed text-muted-foreground">
+      {children}
+    </p>
+  );
 }
 function Actions({ children }: { children: ReactNode }) {
-  return <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-6">{children}</div>;
+  return (
+    <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-6">
+      {children}
+    </div>
+  );
 }
 function Connection({
   icon,
@@ -419,7 +512,9 @@ function Connection({
 }) {
   return (
     <div className="panel flex flex-col gap-4 p-5 sm:flex-row sm:items-start">
-      <span className="grid size-11 shrink-0 place-items-center rounded-xl border border-primary/30 bg-primary/10 text-primary-glow">{icon}</span>
+      <span className="grid size-11 shrink-0 place-items-center rounded-xl border border-primary/30 bg-primary/10 text-primary-glow">
+        {icon}
+      </span>
       <div className="flex-1">
         <h2 className="font-display text-lg">{title}</h2>
         <div className="mt-1 text-sm leading-relaxed text-muted-foreground">{children}</div>

@@ -6,7 +6,10 @@ import { API, API_CONFIGURED } from "@/lib/api";
 const TONES = {
   info: { icon: Info, cls: "border-primary/25 bg-primary/[0.06] [&_svg]:text-primary-glow" },
   warn: { icon: AlertTriangle, cls: "border-warning/30 bg-warning/[0.06] [&_svg]:text-warning" },
-  error: { icon: AlertTriangle, cls: "border-destructive/35 bg-destructive/[0.08] [&_svg]:text-destructive" },
+  error: {
+    icon: AlertTriangle,
+    cls: "border-destructive/35 bg-destructive/[0.08] [&_svg]:text-destructive",
+  },
 };
 
 export function Notice({
@@ -43,14 +46,19 @@ export function Notice({
 /** Explains the missing backend configuration instead of faking data. */
 export function BackendNotice({ className }: { className?: string }) {
   return (
-    <div className={cn("rounded-xl border border-warning/30 bg-warning/[0.05] p-4 text-sm", className)} role="alert">
+    <div
+      className={cn("rounded-xl border border-warning/30 bg-warning/[0.05] p-4 text-sm", className)}
+      role="alert"
+    >
       <div className="flex items-center gap-2 text-foreground">
         <ServerCrash className="size-4 text-warning" />
         <b className="font-medium">Servizio BioPulse non raggiungibile</b>
       </div>
       <p className="mt-2 leading-relaxed text-muted-foreground">
         L'interfaccia chiama il backend su{" "}
-        <code className="rounded bg-secondary px-1.5 py-0.5 font-mono text-xs text-foreground">{API}</code>
+        <code className="rounded bg-secondary px-1.5 py-0.5 font-mono text-xs text-foreground">
+          {API}
+        </code>
         {API_CONFIGURED
           ? ". Verifica che sia avviato e che consenta richieste da questo dominio (CORS e cookie)."
           : ", indirizzo locale predefinito. Avvia il backend o configura VITE_API_URL con l'endpoint HTTPS pubblico."}

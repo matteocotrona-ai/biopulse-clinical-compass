@@ -30,7 +30,10 @@ export function ReadinessRing({ report }: { report: Report }) {
         role="img"
         aria-label={`Indice di prontezza ${report.readiness ?? "non disponibile"} su 100, stato ${meta.label}`}
       >
-        <div className="absolute inset-6 rounded-full blur-3xl opacity-30" style={{ background: meta.color }} />
+        <div
+          className="absolute inset-6 rounded-full blur-3xl opacity-30"
+          style={{ background: meta.color }}
+        />
         <svg viewBox="0 0 220 220" className="relative h-full w-full -rotate-90">
           <defs>
             <linearGradient id="ring-g" x1="0" y1="0" x2="1" y2="1">
@@ -73,7 +76,10 @@ export function ReadinessRing({ report }: { report: Report }) {
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span className="eyebrow text-faint">Prontezza</span>
-          <span className="tnum mt-2 font-display text-7xl leading-none font-extralight" style={{ color: meta.color }}>
+          <span
+            className="tnum mt-2 font-display text-7xl leading-none font-extralight"
+            style={{ color: meta.color }}
+          >
             {report.readiness === null ? "–" : <Counter to={score} />}
           </span>
           <span className="mt-2 font-mono text-xs text-muted-foreground">su 100</span>
@@ -85,7 +91,11 @@ export function ReadinessRing({ report }: { report: Report }) {
           className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium"
           style={{ background: meta.soft, color: meta.color, borderColor: meta.soft }}
         >
-          <span aria-hidden className="grid size-4 place-items-center rounded-full text-[0.6rem] text-background" style={{ background: meta.color }}>
+          <span
+            aria-hidden
+            className="grid size-4 place-items-center rounded-full text-[0.6rem] text-background"
+            style={{ background: meta.color }}
+          >
             {meta.mark}
           </span>
           {meta.label}
@@ -94,7 +104,11 @@ export function ReadinessRing({ report }: { report: Report }) {
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{meta.text}</p>
         <p className="mt-4 font-mono text-[0.7rem] text-faint">
           Dati al {report.as_of ?? "–"} · {report.data_days}/28 giorni · affidabilità{" "}
-          {report.confidence === "full" ? "piena" : report.confidence === "partial" ? "parziale" : "insufficiente"}
+          {report.confidence === "full"
+            ? "piena"
+            : report.confidence === "partial"
+              ? "parziale"
+              : "insufficiente"}
         </p>
         {flags.length > 0 && (
           <ul className="mt-5 grid gap-2 text-left text-sm">
@@ -103,7 +117,12 @@ export function ReadinessRing({ report }: { report: Report }) {
                 key={f.code}
                 className="flex gap-2.5 rounded-lg border border-border bg-surface-sunken/60 px-3 py-2 text-muted-foreground"
               >
-                <span aria-hidden style={{ color: f.severity === "red" ? "var(--level-red)" : "var(--level-yellow)" }}>
+                <span
+                  aria-hidden
+                  style={{
+                    color: f.severity === "red" ? "var(--level-red)" : "var(--level-yellow)",
+                  }}
+                >
                   {f.severity === "red" ? "✕" : "!"}
                 </span>
                 <span>{f.message}</span>

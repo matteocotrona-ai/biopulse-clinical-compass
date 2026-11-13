@@ -31,8 +31,12 @@ export function InfoPage({
       <header className="sticky top-0 z-20 border-b border-border bg-background/60 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
           <Brand />
-          <Link to="/onboarding" className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground">
-            <ArrowLeft className="size-4" /> <span className="hidden sm:inline">Torna al portale</span>
+          <Link
+            to="/onboarding"
+            className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <ArrowLeft className="size-4" />{" "}
+            <span className="hidden sm:inline">Torna al portale</span>
           </Link>
         </div>
       </header>
@@ -82,11 +86,13 @@ export function InfoPage({
           >
             <FileWarning className="mt-0.5 size-5 shrink-0 text-warning" />
             <div>
-              <b className="font-mono text-[0.7rem] tracking-[0.14em] text-warning">DOCUMENTO PROTOTIPALE · BOZZA NON APPROVATA</b>
+              <b className="font-mono text-[0.7rem] tracking-[0.14em] text-warning">
+                DOCUMENTO PROTOTIPALE · BOZZA NON APPROVATA
+              </b>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                Descrive le funzionalità attuali del prototipo. Non costituisce consulenza legale né informativa
-                definitiva; prima di un pilota o rilascio deve essere verificato dal titolare e da professionisti
-                privacy/legali.
+                Descrive le funzionalità attuali del prototipo. Non costituisce consulenza legale né
+                informativa definitiva; prima di un pilota o rilascio deve essere verificato dal
+                titolare e da professionisti privacy/legali.
               </p>
             </div>
           </motion.div>

@@ -139,7 +139,11 @@ function Home() {
             <RiseText text="Ascolta i segnali." delay={0.35} />
             <br />
             <span className="font-serif-accent">
-              <RiseText text="Comprendi il tuo" delay={0.55} wordClassName="text-gradient-blue pr-[0.06em]" />
+              <RiseText
+                text="Comprendi il tuo"
+                delay={0.55}
+                wordClassName="text-gradient-blue pr-[0.06em]"
+              />
             </span>
             <br />
             <RiseText text="recupero." delay={0.75} />
@@ -150,8 +154,8 @@ function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.1, duration: 0.9, ease: EASE }}
           >
-            Un compagno digitale che rende leggibili i dati di allenamento e recupero. Le decisioni restano sempre
-            tue, insieme ai professionisti che ti seguono.
+            Un compagno digitale che rende leggibili i dati di allenamento e recupero. Le decisioni
+            restano sempre tue, insieme ai professionisti che ti seguono.
           </motion.p>
 
           <PulseLine />
@@ -196,7 +200,10 @@ function Home() {
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.35, ease: EASE }}
               >
-                <h2 id="login-title" className="mt-4 font-display text-4xl font-light text-foreground">
+                <h2
+                  id="login-title"
+                  className="mt-4 font-display text-4xl font-light text-foreground"
+                >
                   {registerMode ? (
                     <>
                       Inizia <span className="font-serif-accent text-primary-glow">da qui.</span>
@@ -301,7 +308,13 @@ function Home() {
                   </motion.label>
                 )}
               </AnimatePresence>
-              <Button type="submit" size="lg" variant="hero" className="mt-2 w-full" disabled={busy}>
+              <Button
+                type="submit"
+                size="lg"
+                variant="hero"
+                className="mt-2 w-full"
+                disabled={busy}
+              >
                 {busy ? (
                   <>
                     <Loader2 className="animate-spin" /> Un momento…
@@ -322,15 +335,17 @@ function Home() {
                   setError("");
                 }}
               >
-                {registerMode ? "Hai già un account? Accedi" : "Nuovo alla demo? Crea un account atleta"}
+                {registerMode
+                  ? "Hai già un account? Accedi"
+                  : "Nuovo alla demo? Crea un account atleta"}
               </button>
             )}
 
             <div className="mt-6 flex gap-3 rounded-xl border border-border bg-surface-sunken/60 p-3.5 text-xs leading-relaxed text-muted-foreground">
               <ShieldCheck className="mt-0.5 size-4 shrink-0 text-primary-glow" />
               <p>
-                I dati biometrici sono facoltativi e il consenso si gestisce separatamente. La demo usa dati
-                sintetici e non invia notifiche a professionisti.
+                I dati biometrici sono facoltativi e il consenso si gestisce separatamente. La demo
+                usa dati sintetici e non invia notifiche a professionisti.
               </p>
             </div>
           </div>
@@ -357,8 +372,16 @@ function Home() {
 function PulseLine() {
   const reduce = useReducedMotion();
   return (
-    <div className="relative mt-10 h-20 w-full max-w-xl" aria-label="Illustrazione astratta di un segnale biologico" role="img">
-      <svg viewBox="0 0 640 130" className="h-full w-full overflow-visible" preserveAspectRatio="none">
+    <div
+      className="relative mt-10 h-20 w-full max-w-xl"
+      aria-label="Illustrazione astratta di un segnale biologico"
+      role="img"
+    >
+      <svg
+        viewBox="0 0 640 130"
+        className="h-full w-full overflow-visible"
+        preserveAspectRatio="none"
+      >
         <defs>
           <linearGradient id="pl" x1="0" x2="1">
             <stop offset="0" stopColor="var(--primary)" stopOpacity="0" />
@@ -369,7 +392,10 @@ function PulseLine() {
             <feGaussianBlur stdDeviation="3" />
           </filter>
         </defs>
-        {[{ f: "url(#plg)", w: 4, o: 0.7 }, { f: undefined, w: 1.6, o: 1 }].map((s, i) => (
+        {[
+          { f: "url(#plg)", w: 4, o: 0.7 },
+          { f: undefined, w: 1.6, o: 1 },
+        ].map((s, i) => (
           <motion.path
             key={i}
             d="M0 70h125l24-2 17 2 20-6 15 9 23-19 20 48 27-85 26 72 22-27 21 9 24-1h276"

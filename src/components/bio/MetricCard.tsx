@@ -34,7 +34,10 @@ export function MetricCard({
       />
       <div className="flex items-center justify-between">
         <p className="eyebrow">{label}</p>
-        <span className="size-1.5 rounded-full" style={{ background: tone, boxShadow: `0 0 10px ${tone}` }} />
+        <span
+          className="size-1.5 rounded-full"
+          style={{ background: tone, boxShadow: `0 0 10px ${tone}` }}
+        />
       </div>
       <p className="mt-5 flex items-baseline gap-1.5">
         <span className="tnum font-display text-[2.6rem] leading-none font-light">{value}</span>
@@ -43,7 +46,11 @@ export function MetricCard({
       <div className="mt-4">
         <Sparkline values={values} color={tone} />
       </div>
-      {hint && <p className="mt-3 border-t border-border pt-3 font-mono text-[0.7rem] text-muted-foreground">{hint}</p>}
+      {hint && (
+        <p className="mt-3 border-t border-border pt-3 font-mono text-[0.7rem] text-muted-foreground">
+          {hint}
+        </p>
+      )}
     </motion.div>
   );
 }

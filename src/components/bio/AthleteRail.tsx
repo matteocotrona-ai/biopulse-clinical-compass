@@ -21,8 +21,16 @@ import { cn } from "@/lib/utils";
 
 const SCENARIOS: { id: Scenario; title: string; text: string }[] = [
   { id: "normal", title: "Atleta in equilibrio", text: "Carico stabile, HRV nella norma." },
-  { id: "overload", title: "Sovraccarico", text: "Ultima settimana quasi doppia: ACWR in zona di pericolo." },
-  { id: "hrv_drop", title: "Calo della HRV", text: "Carico regolare ma HRV in forte calo da 3 giorni." },
+  {
+    id: "overload",
+    title: "Sovraccarico",
+    text: "Ultima settimana quasi doppia: ACWR in zona di pericolo.",
+  },
+  {
+    id: "hrv_drop",
+    title: "Calo della HRV",
+    text: "Carico regolare ma HRV in forte calo da 3 giorni.",
+  },
   { id: "recovery", title: "Settimana di scarico", text: "Carico ridotto dopo un blocco intenso." },
 ];
 
@@ -76,7 +84,10 @@ export function AthleteRail({
   async function consent(k: "consent_data" | "consent_alerts", v: boolean) {
     if (!data) return;
     try {
-      await setConsent(athleteId, k === "consent_data" ? { consent_data: v } : { consent_alerts: v });
+      await setConsent(
+        athleteId,
+        k === "consent_data" ? { consent_data: v } : { consent_alerts: v },
+      );
       onChange({ ...data, athlete: { ...data.athlete, [k]: v } });
       toast(v ? "Consenso attivato" : "Consenso revocato");
     } catch (e) {
@@ -86,7 +97,9 @@ export function AthleteRail({
   async function erase(scope: "memory" | "all") {
     try {
       await eraseData(athleteId, scope);
-      setMsg(scope === "all" ? "Tutti i dati sono stati cancellati." : "Memoria dell'agente cancellata.");
+      setMsg(
+        scope === "all" ? "Tutti i dati sono stati cancellati." : "Memoria dell'agente cancellata.",
+      );
       if (scope === "all") onReset();
     } catch (e) {
       setMsg((e as Error).message);
@@ -109,12 +122,17 @@ export function AthleteRail({
               className="flex cursor-pointer items-center justify-between gap-4 rounded-xl border border-border bg-surface-sunken/60 px-4 py-3.5 transition-colors hover:border-primary/30"
             >
               <span className="text-foreground/90">{label}</span>
-              <Switch disabled={!data} checked={!!data?.athlete[k]} onCheckedChange={(v) => consent(k, v)} />
+              <Switch
+                disabled={!data}
+                checked={!!data?.athlete[k]}
+                onCheckedChange={(v) => consent(k, v)}
+              />
             </label>
           ))}
           <p className="text-xs leading-relaxed text-faint">
-            Il contatto salvato in questo browser non è collegato. L'eventuale invio esterno dipende dalla
-            configurazione server; questa scelta tecnica non sostituisce un consenso o un'informativa legale.
+            Il contatto salvato in questo browser non è collegato. L'eventuale invio esterno dipende
+            dalla configurazione server; questa scelta tecnica non sostituisce un consenso o
+            un'informativa legale.
           </p>
         </fieldset>
       )}
@@ -122,8 +140,14 @@ export function AthleteRail({
       {canManage && demoMode && (
         <fieldset className="grid gap-3">
           <legend className="mb-3 eyebrow">Sincronizzazione wearable</legend>
-          <p className="text-xs text-faint">Sorgente sintetica di test: nessun dispositivo o dato personale collegato.</p>
-          <Button onClick={synchronizeWearable} disabled={busy !== null || !consentOk} className="justify-start">
+          <p className="text-xs text-faint">
+            Sorgente sintetica di test: nessun dispositivo o dato personale collegato.
+          </p>
+          <Button
+            onClick={synchronizeWearable}
+            disabled={busy !== null || !consentOk}
+            className="justify-start"
+          >
             {busy === "wearable" ? <Loader2 className="animate-spin" /> : <Watch />}
             {busy === "wearable" ? "Sincronizzo…" : "Sincronizza wearable simulato"}
           </Button>
@@ -133,7 +157,11 @@ export function AthleteRail({
       {canManage && demoMode && (
         <fieldset>
           <legend className="mb-3 eyebrow">Scenario di dati simulati</legend>
-          {!consentOk && <p className="mb-3 text-xs text-warning">Attiva il consenso biometrico per caricare uno scenario.</p>}
+          {!consentOk && (
+            <p className="mb-3 text-xs text-warning">
+              Attiva il consenso biometrico per caricare uno scenario.
+            </p>
+          )}
           <div className="grid gap-2 sm:grid-cols-2">
             {SCENARIOS.map((s, i) => (
               <motion.button
@@ -151,7 +179,9 @@ export function AthleteRail({
                   {busy === s.id && <Loader2 className="size-3.5 animate-spin" />}
                   {busy === s.id ? "Carico…" : s.title}
                 </span>
-                <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{s.text}</span>
+                <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">
+                  {s.text}
+                </span>
                 <RefreshCw className="absolute top-4 right-4 size-3.5 text-faint opacity-0 transition-opacity group-hover:opacity-100" />
               </motion.button>
             ))}
@@ -170,7 +200,10 @@ export function AthleteRail({
         </div>
       )}
       {msg && (
-        <p role="status" className="rounded-xl border border-primary/25 bg-primary/[0.07] p-3.5 text-muted-foreground">
+        <p
+          role="status"
+          className="rounded-xl border border-primary/25 bg-primary/[0.07] p-3.5 text-muted-foreground"
+        >
           {msg}
         </p>
       )}
@@ -188,7 +221,9 @@ export function AthleteRail({
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter className="gap-2">
-            <AlertDialogCancel className="rounded-full border-border-strong bg-transparent">Annulla</AlertDialogCancel>
+            <AlertDialogCancel className="rounded-full border-border-strong bg-transparent">
+              Annulla
+            </AlertDialogCancel>
             <AlertDialogAction
               className="rounded-full bg-destructive text-destructive-foreground hover:bg-destructive/90"
               onClick={() => confirm && erase(confirm)}

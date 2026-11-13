@@ -17,11 +17,14 @@ export function LoadChart({ series, report }: { series: SeriesPoint[]; report: R
     <figure className="panel overflow-hidden p-5 sm:p-7">
       <figcaption className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
         <div>
-          <p className="font-display text-xl font-light sm:text-2xl">Carico di allenamento, 28 giorni</p>
+          <p className="font-display text-xl font-light sm:text-2xl">
+            Carico di allenamento, 28 giorni
+          </p>
           <p className="mt-1 text-sm text-muted-foreground">
             {hovered ? (
               <span className="tnum">
-                {hovered.day} · carico <b className="font-medium text-foreground">{Math.round(hovered.load)}</b>
+                {hovered.day} · carico{" "}
+                <b className="font-medium text-foreground">{Math.round(hovered.load)}</b>
                 {hovered.rpe !== null && <> · RPE {hovered.rpe}</>}
               </span>
             ) : (
@@ -36,7 +39,9 @@ export function LoadChart({ series, report }: { series: SeriesPoint[]; report: R
             ["ACWR", report.acwr?.toFixed(2) ?? "–"],
           ].map(([k, v], i) => (
             <div key={String(k)} className="bg-surface px-4 py-2.5">
-              <dt className="font-mono text-[0.6rem] tracking-[0.12em] text-faint uppercase">{k}</dt>
+              <dt className="font-mono text-[0.6rem] tracking-[0.12em] text-faint uppercase">
+                {k}
+              </dt>
               <dd
                 className="tnum mt-1 font-display text-lg"
                 style={i === 2 && acwrHigh ? { color: "var(--level-red)" } : undefined}
@@ -71,13 +76,42 @@ export function LoadChart({ series, report }: { series: SeriesPoint[]; report: R
             </linearGradient>
           </defs>
           {[0.25, 0.5, 0.75, 1].map((g) => (
-            <line key={g} x1="0" x2={W} y1={H - g * (H - 12)} y2={H - g * (H - 12)} stroke="var(--border)" strokeDasharray="2 6" />
+            <line
+              key={g}
+              x1="0"
+              x2={W}
+              y1={H - g * (H - 12)}
+              y2={H - g * (H - 12)}
+              stroke="var(--border)"
+              strokeDasharray="2 6"
+            />
           ))}
           {acuteStart >= 0 && (
             <>
-              <rect x={acuteStart * bw} y={0} width={7 * bw} height={H} fill="url(#acute-bg)" rx="8" />
-              <line x1={acuteStart * bw} x2={acuteStart * bw} y1={0} y2={H} stroke="var(--primary)" strokeOpacity="0.4" />
-              <text x={acuteStart * bw + 8} y="16" fontSize="10" fill="var(--primary-glow)" fontFamily="var(--font-mono)" letterSpacing="1.5">
+              <rect
+                x={acuteStart * bw}
+                y={0}
+                width={7 * bw}
+                height={H}
+                fill="url(#acute-bg)"
+                rx="8"
+              />
+              <line
+                x1={acuteStart * bw}
+                x2={acuteStart * bw}
+                y1={0}
+                y2={H}
+                stroke="var(--primary)"
+                strokeOpacity="0.4"
+              />
+              <text
+                x={acuteStart * bw + 8}
+                y="16"
+                fontSize="10"
+                fill="var(--primary-glow)"
+                fontFamily="var(--font-mono)"
+                letterSpacing="1.5"
+              >
                 ULTIMI 7 GIORNI
               </text>
             </>
@@ -97,7 +131,11 @@ export function LoadChart({ series, report }: { series: SeriesPoint[]; report: R
                   initial={reduce ? { y: H - h, height: h } : { y: H, height: 0 }}
                   whileInView={{ y: H - h, height: h }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.9, delay: reduce ? 0 : i * 0.025, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{
+                    duration: 0.9,
+                    delay: reduce ? 0 : i * 0.025,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
                   opacity={dim ? 0.35 : 1}
                   style={{ transition: "opacity .25s" }}
                 >
@@ -110,14 +148,25 @@ export function LoadChart({ series, report }: { series: SeriesPoint[]; report: R
           <text x="0" y={H + 18} fontSize="10" fill="var(--faint)" fontFamily="var(--font-mono)">
             {series[0]?.day.slice(5)}
           </text>
-          <text x={W} y={H + 18} fontSize="10" fill="var(--faint)" textAnchor="end" fontFamily="var(--font-mono)">
+          <text
+            x={W}
+            y={H + 18}
+            fontSize="10"
+            fill="var(--faint)"
+            textAnchor="end"
+            fontFamily="var(--font-mono)"
+          >
             {series[series.length - 1]?.day.slice(5)}
           </text>
         </svg>
       </div>
       <div className="mt-4 flex flex-wrap gap-5 font-mono text-[0.65rem] tracking-[0.08em] text-faint">
-        <span className="flex items-center gap-2"><i className="size-2 rounded-sm bg-primary-glow" /> FINESTRA ACUTA</span>
-        <span className="flex items-center gap-2"><i className="size-2 rounded-sm bg-chart-3" /> STORICO CRONICO</span>
+        <span className="flex items-center gap-2">
+          <i className="size-2 rounded-sm bg-primary-glow" /> FINESTRA ACUTA
+        </span>
+        <span className="flex items-center gap-2">
+          <i className="size-2 rounded-sm bg-chart-3" /> STORICO CRONICO
+        </span>
         <span>SOGLIE DEMO, NON VALIDATE</span>
       </div>
     </figure>

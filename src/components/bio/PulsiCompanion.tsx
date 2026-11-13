@@ -21,7 +21,8 @@ function getStatus(
     return {
       state: "privacy_shield",
       label: "CHAT IN PAUSA",
-      message: "Per usare la chat, consulta il profilo e gestisci separatamente il consenso ai dati biometrici.",
+      message:
+        "Per usare la chat, consulta il profilo e gestisci separatamente il consenso ai dati biometrici.",
     };
   if (running)
     return {
@@ -45,25 +46,29 @@ function getStatus(
     return {
       state: "critical_hitl_lock",
       label: "PRUDENZA",
-      message: "Nei dati demo compare un segnale critico. Non è confermata alcuna revisione da parte di un professionista.",
+      message:
+        "Nei dati demo compare un segnale critico. Non è confermata alcuna revisione da parte di un professionista.",
     };
   if (level === "yellow")
     return {
       state: "fatigue_warning",
       label: "SEGNALI DA CONTESTUALIZZARE",
-      message: "Alcuni segnali richiedono attenzione; considera il contesto e, se serve, chiedi un parere professionale.",
+      message:
+        "Alcuni segnali richiedono attenzione; considera il contesto e, se serve, chiedi un parere professionale.",
     };
   if (level === "green")
     return {
       state: "optimal",
       label: "QUADRO DEMO REGOLARE",
-      message: "Nei dati demo non risultano segnali critici. Questo non è un via libera all'attività.",
+      message:
+        "Nei dati demo non risultano segnali critici. Questo non è un via libera all'attività.",
     };
   if (level === "unknown")
     return {
       state: "puzzled",
       label: "DATI INSUFFICIENTI",
-      message: "Mancano informazioni per una valutazione affidabile. La demo non colma i dati assenti.",
+      message:
+        "Mancano informazioni per una valutazione affidabile. La demo non colma i dati assenti.",
     };
   return {
     state: hasConversation ? "idle" : "welcome",
@@ -83,13 +88,28 @@ export function PulsiCompanion(props: {
   hasConversation: boolean;
 }) {
   const { running, disabled, consentRequired } = props;
-  const status = getStatus(disabled, consentRequired, running, props.chatError, props.level, props.hasConversation);
+  const status = getStatus(
+    disabled,
+    consentRequired,
+    running,
+    props.chatError,
+    props.level,
+    props.hasConversation,
+  );
 
   return (
-    <header className="relative flex items-center gap-4 overflow-hidden border-b border-border px-4 py-4 sm:px-6" aria-label="Stato dell'agente BioPulse">
+    <header
+      className="relative flex items-center gap-4 overflow-hidden border-b border-border px-4 py-4 sm:px-6"
+      aria-label="Stato dell'agente BioPulse"
+    >
       <div className="pointer-events-none absolute -left-10 top-1/2 size-40 -translate-y-1/2 rounded-full bg-primary/25 blur-3xl" />
       <div className="relative -my-2 shrink-0">
-        <Pulsi state={status.state} size={76} trackCursor={false} title={`Pulsi: ${status.label.toLowerCase()}`} />
+        <Pulsi
+          state={status.state}
+          size={76}
+          trackCursor={false}
+          title={`Pulsi: ${status.label.toLowerCase()}`}
+        />
       </div>
       <div className="relative min-w-0 flex-1" aria-live="polite">
         <p className="eyebrow flex items-center gap-2 text-faint">
@@ -105,7 +125,9 @@ export function PulsiCompanion(props: {
           >
             <h2 className="mt-2 font-display text-lg">
               Pulsi <span className="text-faint">·</span>{" "}
-              <span className="font-mono text-xs tracking-[0.14em] text-primary-glow">{status.label}</span>
+              <span className="font-mono text-xs tracking-[0.14em] text-primary-glow">
+                {status.label}
+              </span>
             </h2>
             <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{status.message}</p>
           </motion.div>
@@ -114,11 +136,20 @@ export function PulsiCompanion(props: {
       <div className="relative hidden shrink-0 flex-col items-end gap-2 md:flex" aria-hidden="true">
         <span className="signal-bars">
           {Array.from({ length: 7 }).map((_, i) => (
-            <i key={i} style={running ? undefined : { animationPlayState: "paused", opacity: 0.4 }} />
+            <i
+              key={i}
+              style={running ? undefined : { animationPlayState: "paused", opacity: 0.4 }}
+            />
           ))}
         </span>
         <small className="font-mono text-[0.6rem] tracking-[0.14em] text-faint">
-          {running ? "ELABORAZIONE" : consentRequired ? "IN ATTESA" : disabled ? "CARICAMENTO" : "DEMO · DATI SINTETICI"}
+          {running
+            ? "ELABORAZIONE"
+            : consentRequired
+              ? "IN ATTESA"
+              : disabled
+                ? "CARICAMENTO"
+                : "DEMO · DATI SINTETICI"}
         </small>
       </div>
     </header>

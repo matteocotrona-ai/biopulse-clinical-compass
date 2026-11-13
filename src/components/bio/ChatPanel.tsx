@@ -1,5 +1,12 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowUp, FlaskConical, Loader2, MessageSquareText, Stethoscope, Workflow } from "lucide-react";
+import {
+  ArrowUp,
+  FlaskConical,
+  Loader2,
+  MessageSquareText,
+  Stethoscope,
+  Workflow,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { getValidated, streamChat } from "@/lib/api";
@@ -82,7 +89,8 @@ export function ChatPanel({
     try {
       await streamChat({ athlete_id: athleteId, message: text, simulate_failure: failure }, (e) => {
         if (e.type === "trace") setTrace((t) => [...t, e]);
-        else if (e.type === "message") setMsgs((m) => [...m, { role: "agent", text: e.text, meta: e }]);
+        else if (e.type === "message")
+          setMsgs((m) => [...m, { role: "agent", text: e.text, meta: e }]);
       });
     } catch (err) {
       setChatError(true);
@@ -96,7 +104,10 @@ export function ChatPanel({
   return (
     <div>
       {/* Mobile segmented switch */}
-      <div className="mb-4 grid grid-cols-2 gap-1 rounded-full border border-border bg-surface p-1 lg:hidden" role="tablist">
+      <div
+        className="mb-4 grid grid-cols-2 gap-1 rounded-full border border-border bg-surface p-1 lg:hidden"
+        role="tablist"
+      >
         {(
           [
             ["chat", "Conversazione", MessageSquareText],
@@ -114,7 +125,10 @@ export function ChatPanel({
             )}
           >
             {mobileTab === id && (
-              <motion.span layoutId="chat-tab" className="absolute inset-0 rounded-full bg-accent ring-1 ring-primary/30" />
+              <motion.span
+                layoutId="chat-tab"
+                className="absolute inset-0 rounded-full bg-accent ring-1 ring-primary/30"
+              />
             )}
             <Icon className="relative size-4" />
             <span className="relative">{label}</span>
@@ -144,7 +158,11 @@ export function ChatPanel({
             hasConversation={msgs.length > 0}
           />
 
-          <div ref={scrollRef} className="flex-1 space-y-4 overflow-y-auto px-4 py-5 sm:px-6" aria-live="polite">
+          <div
+            ref={scrollRef}
+            className="flex-1 space-y-4 overflow-y-auto px-4 py-5 sm:px-6"
+            aria-live="polite"
+          >
             {msgs.length === 0 && (
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
@@ -155,7 +173,8 @@ export function ChatPanel({
                   Come ti senti <span className="font-serif-accent text-primary-glow">oggi?</span>
                 </p>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Racconta come ti senti o chiedi cosa fare oggi. Puoi anche provare uno di questi messaggi:
+                  Racconta come ti senti o chiedi cosa fare oggi. Puoi anche provare uno di questi
+                  messaggi:
                 </p>
                 <div className="mt-6 grid gap-2 sm:grid-cols-2">
                   {QUICK.map((q, i) => (
@@ -195,9 +214,13 @@ export function ChatPanel({
                     {m.meta && (
                       <p className="mt-2.5 flex flex-wrap gap-x-3 gap-y-1 border-t border-border pt-2 font-mono text-[0.65rem] text-faint">
                         <span>{SOURCE[m.meta.source] ?? m.meta.source}</span>
-                        {m.meta.corrected && <span className="text-warning">corretto dall'autoverifica</span>}
+                        {m.meta.corrected && (
+                          <span className="text-warning">corretto dall'autoverifica</span>
+                        )}
                         {m.meta.held && (
-                          <span className="text-primary-glow">protocollo personalizzato in attesa di validazione</span>
+                          <span className="text-primary-glow">
+                            protocollo personalizzato in attesa di validazione
+                          </span>
                         )}
                       </p>
                     )}
@@ -262,7 +285,11 @@ export function ChatPanel({
                 aria-label={running ? "Analizzo…" : "Invia"}
                 className="grid size-10 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground shadow-glow transition-all duration-300 hover:scale-105 hover:bg-primary-glow disabled:pointer-events-none disabled:opacity-40"
               >
-                {running ? <Loader2 className="size-4 animate-spin" /> : <ArrowUp className="size-4" />}
+                {running ? (
+                  <Loader2 className="size-4 animate-spin" />
+                ) : (
+                  <ArrowUp className="size-4" />
+                )}
               </button>
             </div>
             <label className="mt-3 flex items-center gap-2 px-2 text-xs text-faint">

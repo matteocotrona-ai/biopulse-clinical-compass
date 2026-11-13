@@ -54,7 +54,12 @@ export async function login(email: string, password: string) {
   return result.user;
 }
 
-export async function registerAthlete(email: string, password: string, name: string, profile: string) {
+export async function registerAthlete(
+  email: string,
+  password: string,
+  name: string,
+  profile: string,
+) {
   const result = await json<{ user: SessionInfo["user"]; csrf_token: string }>(
     await post("/api/auth/register", { email, password, name, profile }),
   );
@@ -91,7 +96,10 @@ export const syncWearable = (athlete_id: string, scenario: Scenario = "normal") 
     json<WearableSyncResult>(r),
   );
 
-export const setConsent = (id: string, body: { consent_data?: boolean; consent_alerts?: boolean }) =>
+export const setConsent = (
+  id: string,
+  body: { consent_data?: boolean; consent_alerts?: boolean },
+) =>
   request(`/api/athletes/${encodeURIComponent(id)}/consent`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
@@ -165,5 +173,7 @@ export async function streamChat(
 /** Errore leggibile per i casi "backend non raggiungibile". */
 export function isNetworkError(reason: unknown) {
   const message = (reason as { message?: string })?.message ?? "";
-  return reason instanceof TypeError || message === "Failed to fetch" || message.includes("NetworkError");
+  return (
+    reason instanceof TypeError || message === "Failed to fetch" || message.includes("NetworkError")
+  );
 }

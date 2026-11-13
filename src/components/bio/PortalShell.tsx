@@ -30,7 +30,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-type NavItem = { to: "/dashboard" | "/assistant" | "/profile"; label: string; short: string; icon: typeof LayoutDashboard };
+type NavItem = {
+  to: "/dashboard" | "/assistant" | "/profile";
+  label: string;
+  short: string;
+  icon: typeof LayoutDashboard;
+};
 
 export function PortalShell({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
@@ -93,7 +98,10 @@ export function PortalShell({ children }: { children: ReactNode }) {
           )}
         </div>
         {!collapsed && <p className="mt-6 mb-3 px-7 eyebrow text-faint">Il tuo spazio</p>}
-        <nav className={cn("grid gap-1", collapsed ? "mt-6 px-3" : "px-3")} aria-label="Navigazione principale">
+        <nav
+          className={cn("grid gap-1", collapsed ? "mt-6 px-3" : "px-3")}
+          aria-label="Navigazione principale"
+        >
           {nav.map((item) => {
             const active = pathname === item.to;
             const Icon = item.icon;
@@ -146,13 +154,21 @@ export function PortalShell({ children }: { children: ReactNode }) {
               </div>
               <p className="mt-1.5 text-xs text-muted-foreground">Fonti sintetiche · no device</p>
               <div className="mt-3 flex gap-3 text-[0.7rem] text-faint">
-                <Link to="/ethics" className="hover:text-foreground">Etica</Link>
-                <Link to="/privacy" className="hover:text-foreground">Privacy</Link>
-                <Link to="/cookies" className="hover:text-foreground">Cookie</Link>
+                <Link to="/ethics" className="hover:text-foreground">
+                  Etica
+                </Link>
+                <Link to="/privacy" className="hover:text-foreground">
+                  Privacy
+                </Link>
+                <Link to="/cookies" className="hover:text-foreground">
+                  Cookie
+                </Link>
               </div>
             </div>
           )}
-          <div className={cn("flex items-center", collapsed ? "flex-col gap-2" : "justify-between")}>
+          <div
+            className={cn("flex items-center", collapsed ? "flex-col gap-2" : "justify-between")}
+          >
             <button
               onClick={signOut}
               className={cn(
@@ -169,7 +185,11 @@ export function PortalShell({ children }: { children: ReactNode }) {
               className="grid size-9 place-items-center rounded-lg text-faint transition-colors hover:bg-secondary hover:text-foreground"
               aria-label={collapsed ? "Espandi barra laterale" : "Riduci barra laterale"}
             >
-              {collapsed ? <PanelLeftOpen className="size-4" /> : <PanelLeftClose className="size-4" />}
+              {collapsed ? (
+                <PanelLeftOpen className="size-4" />
+              ) : (
+                <PanelLeftClose className="size-4" />
+              )}
             </button>
           </div>
         </div>
@@ -210,7 +230,9 @@ export function PortalShell({ children }: { children: ReactNode }) {
                   {initial}
                 </span>
                 <span className="hidden text-left leading-tight sm:block">
-                  <strong className="block max-w-[12rem] truncate text-sm font-medium">{displayName}</strong>
+                  <strong className="block max-w-[12rem] truncate text-sm font-medium">
+                    {displayName}
+                  </strong>
                   <small className="text-[0.7rem] text-muted-foreground">
                     Profilo atleta · {data?.athlete.profile ?? "standard"}
                   </small>
@@ -224,7 +246,9 @@ export function PortalShell({ children }: { children: ReactNode }) {
               >
                 <DropdownMenuLabel className="px-2.5 py-2">
                   <span className="block truncate text-sm font-medium">{displayName}</span>
-                  <span className="block truncate text-xs font-normal text-muted-foreground">{session.user.email}</span>
+                  <span className="block truncate text-xs font-normal text-muted-foreground">
+                    {session.user.email}
+                  </span>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator className="bg-border" />
                 <DropdownMenuItem asChild className="rounded-lg px-2.5 py-2 focus:bg-accent">
@@ -333,24 +357,55 @@ export function PageHeading({
           {title}
           {accent && <span className="font-serif-accent text-gradient-blue"> {accent}</span>}
         </h1>
-        {lead && <p className="mt-4 max-w-xl text-[0.975rem] leading-relaxed text-muted-foreground">{lead}</p>}
+        {lead && (
+          <p className="mt-4 max-w-xl text-[0.975rem] leading-relaxed text-muted-foreground">
+            {lead}
+          </p>
+        )}
       </div>
       {action}
     </div>
   );
 }
 
-export function PageContainer({ children, className }: { children: ReactNode; className?: string }) {
-  return <main className={cn("mx-auto w-full max-w-[90rem] px-4 py-8 sm:px-6 sm:py-10 lg:px-10 lg:py-14", className)}>{children}</main>;
+export function PageContainer({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <main
+      className={cn(
+        "mx-auto w-full max-w-[90rem] px-4 py-8 sm:px-6 sm:py-10 lg:px-10 lg:py-14",
+        className,
+      )}
+    >
+      {children}
+    </main>
+  );
 }
 
-export function SectionLabel({ index, children, note }: { index: string; children: ReactNode; note?: ReactNode }) {
+export function SectionLabel({
+  index,
+  children,
+  note,
+}: {
+  index: string;
+  children: ReactNode;
+  note?: ReactNode;
+}) {
   return (
     <div className="flex items-center gap-3 eyebrow">
       <span className="text-primary-glow">{index}</span>
       <span className="h-px w-6 bg-border-strong" />
       <span className="text-foreground/80">{children}</span>
-      {note && <span className="ml-auto rounded-full border border-border px-2 py-1 text-[0.6rem] text-faint">{note}</span>}
+      {note && (
+        <span className="ml-auto rounded-full border border-border px-2 py-1 text-[0.6rem] text-faint">
+          {note}
+        </span>
+      )}
     </div>
   );
 }

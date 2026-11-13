@@ -1,7 +1,13 @@
 import { useId } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
-export function Sparkline({ values, color = "var(--primary-glow)" }: { values: (number | null)[]; color?: string }) {
+export function Sparkline({
+  values,
+  color = "var(--primary-glow)",
+}: {
+  values: (number | null)[];
+  color?: string;
+}) {
   const uid = useId().replace(/:/g, "");
   const reduce = useReducedMotion();
   const pts = values
@@ -16,12 +22,18 @@ export function Sparkline({ values, color = "var(--primary-glow)" }: { values: (
   const w = 160;
   const h = 48;
   const n = values.length - 1 || 1;
-  const xy = (p: { v: number; i: number }) => [(p.i / n) * w, h - 4 - ((p.v - min) / span) * (h - 10)] as const;
+  const xy = (p: { v: number; i: number }) =>
+    [(p.i / n) * w, h - 4 - ((p.v - min) / span) * (h - 10)] as const;
   const line = pts.map((p, idx) => `${idx ? "L" : "M"}${xy(p).join(",")}`).join(" ");
   const area = `${line} L${xy(lastPt)[0]},${h} L${xy(firstPt)[0]},${h} Z`;
   const [lx, ly] = xy(lastPt);
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="h-12 w-full overflow-visible" aria-hidden preserveAspectRatio="none">
+    <svg
+      viewBox={`0 0 ${w} ${h}`}
+      className="h-12 w-full overflow-visible"
+      aria-hidden
+      preserveAspectRatio="none"
+    >
       <defs>
         <linearGradient id={`sa-${uid}`} x1="0" x2="0" y1="0" y2="1">
           <stop offset="0" stopColor={color} stopOpacity="0.28" />

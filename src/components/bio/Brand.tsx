@@ -25,7 +25,15 @@ export function BrandMark({ className }: { className?: string }) {
   );
 }
 
-export function Brand({ to = "/", compact = false, className }: { to?: string; compact?: boolean; className?: string }) {
+export function Brand({
+  to = "/",
+  compact = false,
+  className,
+}: {
+  to?: string;
+  compact?: boolean;
+  className?: string;
+}) {
   return (
     <Link to={to} className={cn("group flex items-center gap-3", className)} aria-label="BioPulse">
       <BrandMark className="transition-transform duration-500 group-hover:rotate-[-8deg]" />

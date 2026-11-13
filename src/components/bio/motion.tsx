@@ -30,7 +30,10 @@ export function Stagger({
       initial={"hidden"}
       whileInView="show"
       viewport={{ once: true, margin: "-40px" }}
-      variants={{ hidden: {}, show: { transition: { staggerChildren: gap, delayChildren: delay } } }}
+      variants={{
+        hidden: {},
+        show: { transition: { staggerChildren: gap, delayChildren: delay } },
+      }}
     >
       {children}
     </Comp>
@@ -87,7 +90,10 @@ export function RiseText({
   return (
     <span className={className}>
       {text.split(" ").map((word, i) => (
-        <span key={`${word}-${i}`} className="inline-block overflow-hidden pt-[0.04em] pb-[0.2em] -mb-[0.1em] align-top">
+        <span
+          key={`${word}-${i}`}
+          className="inline-block overflow-hidden pt-[0.04em] pb-[0.2em] -mb-[0.1em] align-top"
+        >
           <motion.span
             className={wordClassName ? `inline-block ${wordClassName}` : "inline-block"}
             initial={{ y: "110%" }}

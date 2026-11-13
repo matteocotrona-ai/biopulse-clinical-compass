@@ -17,9 +17,15 @@ export const Route = createFileRoute("/_portal/dashboard")({
   head: () => ({
     meta: [
       { title: "Panoramica — BioPulse" },
-      { name: "description", content: "Il tuo quadro di oggi: prontezza, HRV, carico e recupero in un'unica vista." },
+      {
+        name: "description",
+        content: "Il tuo quadro di oggi: prontezza, HRV, carico e recupero in un'unica vista.",
+      },
       { property: "og:title", content: "Panoramica — BioPulse" },
-      { property: "og:description", content: "Prontezza indicativa, segnali e trend di carico e recupero." },
+      {
+        property: "og:description",
+        content: "Prontezza indicativa, segnali e trend di carico e recupero.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -56,7 +62,10 @@ function DashboardPage() {
         <Notice
           title="Ambiente dimostrativo."
           action={
-            <Link to="/ethics" className="text-xs whitespace-nowrap text-primary-glow hover:underline">
+            <Link
+              to="/ethics"
+              className="text-xs whitespace-nowrap text-primary-glow hover:underline"
+            >
               Scopri i limiti ↗
             </Link>
           }
@@ -76,17 +85,32 @@ function DashboardPage() {
       {data && report && (
         <>
           {/* status strip */}
-          <Stagger className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border md:grid-cols-4" gap={0.05}>
+          <Stagger
+            className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border md:grid-cols-4"
+            gap={0.05}
+          >
             {[
               ["Stato", LEVEL[report.level].label, LEVEL[report.level].color],
-              ["Confidenza", report.confidence === "full" ? "Completa" : report.confidence === "partial" ? "Parziale" : "Insufficiente"],
+              [
+                "Confidenza",
+                report.confidence === "full"
+                  ? "Completa"
+                  : report.confidence === "partial"
+                    ? "Parziale"
+                    : "Insufficiente",
+              ],
               ["Giorni con dati", `${report.data_days} / 28`],
               ["Ultimo dato", report.as_of ?? "–"],
             ].map(([k, v, c]) => (
               <Item key={k} className="bg-surface/90 px-5 py-4">
                 <p className="eyebrow text-faint">{k}</p>
                 <p className="tnum mt-2 flex items-center gap-2 font-display text-lg">
-                  {c && <span className="size-2 rounded-full" style={{ background: c, boxShadow: `0 0 10px ${c}` }} />}
+                  {c && (
+                    <span
+                      className="size-2 rounded-full"
+                      style={{ background: c, boxShadow: `0 0 10px ${c}` }}
+                    />
+                  )}
                   {v}
                 </p>
               </Item>
@@ -120,8 +144,16 @@ function DashboardPage() {
                     value={report.rmssd_ms?.toFixed(0) ?? "–"}
                     unit="ms"
                     values={values("rmssd_ms")}
-                    hint={report.hrv_z !== null ? `Z-score ${report.hrv_z > 0 ? "+" : ""}${report.hrv_z}` : "baseline in costruzione"}
-                    tone={report.hrv_z !== null && report.hrv_z < -1.5 ? "var(--level-red)" : "var(--primary-glow)"}
+                    hint={
+                      report.hrv_z !== null
+                        ? `Z-score ${report.hrv_z > 0 ? "+" : ""}${report.hrv_z}`
+                        : "baseline in costruzione"
+                    }
+                    tone={
+                      report.hrv_z !== null && report.hrv_z < -1.5
+                        ? "var(--level-red)"
+                        : "var(--primary-glow)"
+                    }
                     alert={report.hrv_z !== null && report.hrv_z < -1.5}
                   />
                 </Item>
@@ -130,8 +162,14 @@ function DashboardPage() {
                     label="ACWR"
                     value={report.acwr?.toFixed(2) ?? "–"}
                     values={series.map((point) => point.load)}
-                    hint={report.acwr !== null ? "soglie demo, non validate" : "dato non disponibile"}
-                    tone={report.acwr !== null && report.acwr > 1.5 ? "var(--level-red)" : "var(--primary-glow)"}
+                    hint={
+                      report.acwr !== null ? "soglie demo, non validate" : "dato non disponibile"
+                    }
+                    tone={
+                      report.acwr !== null && report.acwr > 1.5
+                        ? "var(--level-red)"
+                        : "var(--primary-glow)"
+                    }
                     alert={report.acwr !== null && report.acwr > 1.5}
                   />
                 </Item>
@@ -191,15 +229,21 @@ function DashboardPage() {
                   <span className="grid size-10 place-items-center rounded-full border border-primary/40 bg-primary/10 text-primary-glow">
                     <Asterisk className="size-5" />
                   </span>
-                  <p className="mt-6 eyebrow">{isAthlete ? "Esplora contesto e incertezza" : "Revisione professionale"}</p>
+                  <p className="mt-6 eyebrow">
+                    {isAthlete ? "Esplora contesto e incertezza" : "Revisione professionale"}
+                  </p>
                   <h2 className="mt-3 font-display text-3xl font-light sm:text-4xl">
                     {isAthlete ? (
                       <>
-                        Un numero da solo <span className="font-serif-accent text-primary-glow">non basta.</span>
+                        Un numero da solo{" "}
+                        <span className="font-serif-accent text-primary-glow">non basta.</span>
                       </>
                     ) : (
                       <>
-                        Contesto <span className="font-serif-accent text-primary-glow">prima della revisione.</span>
+                        Contesto{" "}
+                        <span className="font-serif-accent text-primary-glow">
+                          prima della revisione.
+                        </span>
                       </>
                     )}
                   </h2>
@@ -225,7 +269,11 @@ function DashboardPage() {
 
 function DashboardSkeleton() {
   return (
-    <div className="mt-8 grid gap-6 xl:grid-cols-12" aria-label="Caricamento dei dati dimostrativi…" role="status">
+    <div
+      className="mt-8 grid gap-6 xl:grid-cols-12"
+      aria-label="Caricamento dei dati dimostrativi…"
+      role="status"
+    >
       <div className="skeleton-block h-[26rem] xl:col-span-5" />
       <div className="grid gap-4 sm:grid-cols-2 xl:col-span-7">
         {[0, 1, 2, 3].map((i) => (
