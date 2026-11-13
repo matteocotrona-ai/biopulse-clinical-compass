@@ -6,7 +6,7 @@ export function BrandMark({ className }: { className?: string }) {
   return (
     <span
       className={cn(
-        "relative grid size-9 shrink-0 place-items-center rounded-[0.7rem] bg-gradient-primary shadow-glow",
+        "relative grid size-9 shrink-0 place-items-center rounded-[0.3rem] bg-gradient-primary shadow-glow",
         className,
       )}
       aria-hidden
@@ -39,8 +39,8 @@ export function Brand({
       <BrandMark className="transition-transform duration-500 group-hover:rotate-[-8deg]" />
       {!compact && (
         <span className="leading-none">
-          <span className="font-display text-[1.15rem] font-semibold tracking-tight text-foreground">
-            bio<span className="text-primary-glow">pulse</span>
+          <span className="font-wide text-[0.95rem] font-medium tracking-[0.04em] text-foreground">
+            BIO<span className="text-primary-glow">PULSE</span>
           </span>
           <span className="mt-1 block font-mono text-[0.55rem] tracking-[0.28em] text-faint">
             ATHLETE INTELLIGENCE

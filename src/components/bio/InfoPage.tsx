@@ -67,7 +67,8 @@ export function InfoPage({
           >
             <span className="glow-dot" /> {eyebrow}
           </motion.p>
-          <h1 className="mt-6 font-display text-[clamp(2.5rem,6vw,4.75rem)] leading-[0.98] font-light">
+          <h1 className="relative isolate mt-6 font-wide text-[clamp(1.9rem,4.6vw,3.75rem)] leading-[1.04]">
+            <span className="block-mark" aria-hidden />
             <RiseText text={title} delay={0.1} />
           </h1>
           <motion.p
